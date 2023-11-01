@@ -14,6 +14,8 @@ const ProductDetailedPage = () => {
 	const [product, setProduct] = useState<ProductType>();
 	const [isOpen, setIsOpen] = useState(true);
 
+	console.log(product);
+
 	const { id } = useParams();
 	const router = useRouter();
 
@@ -27,7 +29,7 @@ const ProductDetailedPage = () => {
 				if (c.id === product?.id) {
 					return {
 						...c,
-						quantity: c.qunatity + 1,
+						quantity: c.quantity + 1,
 					};
 				}
 
