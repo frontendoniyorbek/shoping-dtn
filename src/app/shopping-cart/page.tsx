@@ -22,7 +22,7 @@ const ShoppingCart = () => {
 			if (product.id === id) {
 				return {
 					...product,
-					quantity: product.qunatity + 1,
+					quantity: product.quantity + 1,
 				};
 			}
 
@@ -36,14 +36,14 @@ const ShoppingCart = () => {
 	const handleDecrement = (id: number) => {
 		const existProduct = products.find(product => product.id === id);
 
-		if (existProduct?.qunatity === 1) {
+		if (existProduct?.quantity === 1) {
 			removeProduct(existProduct.id);
 		} else {
 			const updatedCart = products.map(product => {
 				if (product.id === id) {
 					return {
 						...product,
-						quantity: product.qunatity - 1,
+						quantity: product.quantity - 1,
 					};
 				}
 
@@ -57,7 +57,7 @@ const ShoppingCart = () => {
 
 	useEffect(() => {
 		const total = products.reduce((acc, item) => {
-			return acc + item.price * item.qunatity;
+			return acc + item.price * item.quantity;
 		}, 0);
 
 		setTotal(total);
@@ -66,7 +66,7 @@ const ShoppingCart = () => {
 	return (
 		<>
 			{products.length ? (
-				<div className='h-screen bg-gray-100 pt-20'>
+				<div className='h-auto bg-gray-100 pt-20'>
 					<h1 className='mb-10 text-center text-2xl font-bold'>Cart Items</h1>
 					<div className='mx-auto max-w-5xl justify-center px-6 md:flex md:space-x-6 xl:px-0'>
 						<div className='rounded-lg md:w-2/3'>
@@ -117,7 +117,7 @@ const ShoppingCart = () => {
 												<input
 													className='h-8 w-8 border bg-white text-center text-xs outline-none'
 													type='number'
-													value={product.qunatity}
+													value={product.quantity}
 													min='1'
 												/>
 												<span
@@ -129,7 +129,7 @@ const ShoppingCart = () => {
 											</div>
 											<div className='flex items-center space-x-4'>
 												<p className='text-sm'>
-													{(product.price * product.qunatity).toLocaleString('en-US', {
+													{(product.price * product.quantity).toLocaleString('en-US', {
 														style: 'currency',
 														currency: 'usd',
 													})}
