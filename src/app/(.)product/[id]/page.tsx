@@ -14,28 +14,33 @@ const ProductDetailedPage = () => {
 	const [product, setProduct] = useState<ProductType>();
 	const [isOpen, setIsOpen] = useState(true);
 
+	const { id } = useParams();
+	const router = useRouter();
+
 	const handleClick = () => {
-		const products: ProductType[] = JSON.parse(localStorage.getItem('cart') as string) || [];
+		const products: ProductType[] = JSON.parse(localStorage.getItem('carts') as string) || [];
 
 		const isExistProduct = products.find(c => c.id === product?.id);
 
 		if (isExistProduct) {
-			const updateData = products.map(c => {
+			const updatedData = products.map(c => {
 				if (c.id === product?.id) {
-					return { ...c, qunatity: c.qunatity + 1 };
+					return {
+						...c,
+						quantity: c.qunatity + 1,
+					};
 				}
+
 				return c;
 			});
-			localStorage.setItem('carts', JSON.stringify(updateData));
+
+			localStorage.setItem('carts', JSON.stringify(updatedData));
 		} else {
-			const data = [...products, { ...product, qunatity: 1 }];
+			const data = [...products, { ...product, quantity: 1 }];
 			localStorage.setItem('carts', JSON.stringify(data));
 		}
-		toast('Product added to your  bag !!!');
+		toast('Product added to your bag!!');
 	};
-
-	const { id } = useParams();
-	const router = useRouter();
 
 	useEffect(() => {
 		async function getData() {
@@ -96,6 +101,10 @@ const ProductDetailedPage = () => {
 															<StarIconOutline key={i} className='h-4 w-4 text-yellow-500' />
 														)
 													)}
+													{/* <ReactStars
+														value={product.rating.rate}
+														edit={false}
+													/> */}
 												</div>
 											)}
 											<p className='text-blue-600 hover:underline cursor-pointer text-xs'>
