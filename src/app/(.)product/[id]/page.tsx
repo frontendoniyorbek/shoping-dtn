@@ -20,7 +20,7 @@ const ProductDetailedPage = () => {
 	const router = useRouter();
 
 	const handleClick = () => {
-		const products: ProductType[] = JSON.parse(localStorage.getItem('carts') as string) || [];
+		const products: ProductType[] = (typeof window !== 'undefined' && JSON.parse(localStorage.getItem('carts') as string)) || [];
 
 		const isExistProduct = products.find(c => c.id === product?.id);
 
@@ -36,10 +36,10 @@ const ProductDetailedPage = () => {
 				return c;
 			});
 
-			localStorage.setItem('carts', JSON.stringify(updatedData));
+			typeof window !== 'undefined' && localStorage.setItem('carts', JSON.stringify(updatedData));
 		} else {
 			const data = [...products, { ...product, quantity: 1 }];
-			localStorage.setItem('carts', JSON.stringify(data));
+			typeof window !== 'undefined' && localStorage.setItem('carts', JSON.stringify(data));
 		}
 		toast('Product added to your bag!!');
 	};
