@@ -13,7 +13,7 @@ const ShoppingCart = () => {
 
 	const removeProduct = (id: number) => {
 		const updatedCart = products.filter(product => product.id !== id);
-		localStorage.setItem('carts', JSON.stringify(updatedCart));
+		typeof window !== 'undefined' && localStorage.setItem('carts', JSON.stringify(updatedCart));
 		setProducts(updatedCart);
 	};
 
@@ -29,7 +29,7 @@ const ShoppingCart = () => {
 			return product;
 		});
 
-		localStorage.setItem('carts', JSON.stringify(updatedCart));
+		typeof window !== 'undefined' && localStorage.setItem('carts', JSON.stringify(updatedCart));
 		setProducts(updatedCart);
 	};
 
@@ -50,7 +50,7 @@ const ShoppingCart = () => {
 				return product;
 			});
 
-			localStorage.setItem('carts', JSON.stringify(updatedCart));
+			typeof window !== 'undefined' && localStorage.setItem('carts', JSON.stringify(updatedCart));
 			setProducts(updatedCart);
 		}
 	};
